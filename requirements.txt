@@ -1,0 +1,4 @@
+dbt-core==1.5.3
+dbt-duckdb==1.5.2
+dbt-extractor==0.4.1
+duckdb==0.8.1

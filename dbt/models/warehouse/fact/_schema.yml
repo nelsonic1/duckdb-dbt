@@ -1,0 +1,102 @@
+version: 2
+
+models:
+  - name: fact_order
+    columns:
+      - name: fact_order_key
+        description: "Generated surrogate key for the fact_order."
+        tests:
+          - unique
+
+      - name: order_key
+        description: "Order key."
+
+      - name: order_id
+        description: "Order ID."
+        tests:
+          - not_null
+
+      - name: order_purchase_date
+        description: "Order Purchase Date."
+
+      - name: customer_id
+        description: "Customer ID."
+
+      - name: order_status
+        description: "Order Status."
+
+      - name: order_approved_at
+        description: "Order Approved At Timestamp."
+
+      - name: total_order_price_usd
+        description: "Total Order Price in USD."
+
+      - name: avg_order_price_usd
+        description: "Average Order Price in USD."
+
+      - name: min_price_usd
+        description: "Minimum Order Price in USD."
+
+      - name: max_price_usd
+        description: "Maximum Order Price in USD."
+
+      - name: total_order_freight_usd
+        description: "Total Order Freight in USD."
+
+      - name: avg_order_freight_usd
+        description: "Average Order Freight in USD."
+
+      - name: min_freight_usd
+        description: "Minimum Freight in USD."
+
+      - name: max_freight_usd
+        description: "Maximum Freight in USD."
+
+      - name: total_products
+        description: "Total number of products."
+
+      - name: total_product_categories
+        description: "Total number of product categories."
+
+      - name: total_sellers
+        description: "Total number of sellers."
+
+      - name: total_order_items
+        description: "Total number of order items."
+
+    unique:
+      - column_name: fact_order_key
+
+
+  - name: fact_revenue
+    columns:
+      - name: order_purchase_date
+        description: "Order Purchase Date."
+        tests:
+          - not_null
+
+      - name: total_revenue_usd
+        description: "Total Revenue in USD."
+        tests:
+          - not_null
+
+      - name: average_revenue_per_order_usd
+        description: "Average Revenue per Order in USD."
+        data_type: numeric
+        precision: 12
+        scale: 2
+        tests:
+          - not_null
+
+      - name: total_orders_count
+        description: "Total number of orders."
+        tests:
+          - not_null
+
+      - name: total_customers_making_orders_count
+        description: "Total number of customers making orders."
+        tests:
+          - not_null
+
+    unique:
+      - column_name: order_purchase_date

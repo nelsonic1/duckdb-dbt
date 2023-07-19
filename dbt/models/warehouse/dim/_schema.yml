@@ -1,0 +1,133 @@
+version: 2
+
+models:
+  - name: dim_customer
+    columns:
+      - name: customer_key
+        description: "Generated surrogate key for the customer."
+        tests:
+          - unique
+
+      - name: customer_id
+        description: "Customer ID."
+        tests:
+          - not_null
+
+      - name: customer_unique_id
+        description: "Customer Unique ID."
+
+      - name: customer_zip_code_prefix
+        description: "Customer Zip Code Prefix."
+
+      - name: customer_city
+        description: "Customer City."
+
+      - name: customer_state
+        description: "Customer State."
+
+    unique:
+      - column_name: customer_key
+
+
+  - name: dim_order
+    columns:
+      - name: order_key
+        description: "Generated surrogate key for the order."
+        tests:
+          - not_null
+      
+      - name: order_item_key
+        description: "Generated surrogate key for the order item."
+        tests:
+          - not_null
+          - unique
+
+      - name: order_id
+        description: "Order ID."
+        tests:
+          - not_null
+
+      - name: customer_id
+        description: "Customer ID."
+
+      - name: order_status
+        description: "Order Status."
+
+      - name: order_purchase_timestamp
+        description: "Order Purchase Timestamp."
+
+      - name: order_purchase_date
+        description: "Order Purchase Date."
+
+      - name: order_approved_at
+        description: "Order Approved At Timestamp."
+
+      - name: order_delivered_carrier_date
+        description: "Order Delivered Carrier Date."
+
+      - name: order_delivered_customer_date
+        description: "Order Delivered Customer Date."
+
+      - name: order_estimated_delivery_date
+        description: "Order Estimated Delivery Date."
+
+      - name: order_item_id
+        description: "Order Item ID."
+
+      - name: product_id
+        description: "Product ID."
+
+      - name: product_category_name
+        description: "Product Category Name."
+
+      - name: seller_id
+        description: "Seller ID."
+
+      - name: price
+        description: "Price of the product."
+
+      - name: freight_value
+        description: "Freight Value."
+
+    unique:
+      - column_name: order_key
+
+
+  - name: dim_product
+    columns:
+      - name: product_key
+        description: "Generated surrogate key for the product."
+        tests:
+          - unique
+
+      - name: product_id
+        description: "Product ID."
+        tests:
+          - not_null
+
+      - name: product_category_name
+        description: "Product Category Name."
+
+      - name: product_name_length
+        description: "Product Name Length."
+
+      - name: product_description_length
+        description: "Product Description Length."
+
+      - name: product_photos_qty
+        description: "Product Photos Quantity."
+
+      - name: product_weight_g
+        description: "Product Weight in grams."
+
+      - name: product_length_cm
+        description: "Product Length in centimeters."
+
+      - name: product_height_cm
+        description: "Product Height in centimeters."
+
+      - name: product_width_cm
+        description: "Product Width in centimeters."
+
+    unique:
+      - column_name: product_key

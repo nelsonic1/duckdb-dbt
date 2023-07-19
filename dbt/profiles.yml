@@ -1,0 +1,13 @@
+# profiles.yml
+
+local:
+  target: dev
+  outputs:
+    dev:
+      type: duckdb
+      path: '../duckdb/database.duckdb'
+
+config:
+  send_anonymous_usage_stats: false
+  use_colors: true
+  active: local
