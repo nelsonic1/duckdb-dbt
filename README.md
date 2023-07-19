@@ -1,4 +1,4 @@
-# Duckdb & dbt Local Analysis
+# DuckDB & dbt Local Analysis
 This project makes use of duckdb and dbt to run analytics locally.
 
 * [DuckDB](https://duckdb.org/) is a super fast in-memory columnar data store that works great with CSV, JSON, Parquet and remote object stores like S3.  
