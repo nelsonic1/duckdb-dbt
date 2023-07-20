@@ -14,7 +14,7 @@ SELECT
     oi.product_id,
     p.product_category_name,
     oi.seller_id,
-    CAST(oi.price AS NUMERIC(12, 2)) AS price,
+    oi.price::NUMERIC(12, 2) AS price,
     oi.freight_value::NUMERIC(12, 2) AS freight_value
 FROM {{ ref('staging_olist_orders') }} o
 JOIN {{ ref('staging_olist_order_items') }} oi
