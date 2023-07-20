@@ -1,4 +1,4 @@
-SELECT 
+SELECT
     {{ dbt_utils.generate_surrogate_key(['order_id']) }} AS fact_order_key,
     order_key,
     order_id,
@@ -20,5 +20,14 @@ SELECT
     COUNT(order_item_id) AS total_order_items
 FROM {{ ref('dim_order') }}
 WHERE order_status NOT IN ('unavailable', 'canceled')
-GROUP BY 1, 2, 3, 4, 5, 6, 7
-ORDER BY order_purchase_date DESC, order_id ASC
+GROUP BY
+    fact_order_key,
+    order_key,
+    order_id,
+    order_purchase_date,
+    customer_id,
+    order_status,
+    order_approved_at
+ORDER BY
+    order_purchase_date DESC,
+    order_id ASC

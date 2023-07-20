@@ -1,5 +1,5 @@
-SELECT 
-    {{ dbt_utils.generate_surrogate_key(['product_id']) }} as product_key,
+SELECT
+    {{ dbt_utils.generate_surrogate_key(['product_id']) }} AS product_key,
     product_id,
     product_category_name,
     product_name_length,
