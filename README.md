@@ -5,6 +5,8 @@ This project makes use of duckdb and dbt to run analytics locally.
 * [dbt](https://www.getdbt.com/) (data build tool) is a data processing framework for build and testing models and documenting your data.
 * [dbt-duckdb adapter](https://github.com/jwills/dbt-duckdb) is the adapter used in this project to facilitate that communication between duckdb and dbt - created by [Josh Wills](https://github.com/jwills)
 * The [data](https://app.mode.com/brooklyndata/tables) used in this project is from Brooklyn Data
+* dbt SQL linting is provided by [SQLFluff](https://sqlfluff.com/) - ([Github](https://github.com/sqlfluff/sqlfluff))
+* Automatic linting on Pull Request provided by Github Actions
 
 ## Project Structure
 ```
