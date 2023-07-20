@@ -1,0 +1,43 @@
+# GENERAL CONFIG
+[sqlfluff]
+dialect = duckdb
+templater = dbt
+verbose = 1
+large_file_skip_byte_limit = 60000
+max_line_length = 140
+exclude_rules = ambiguous.column_count, structure.column_order
+
+## RULES - GENERAL
+
+## TEMPLATER
+[sqlfluff:templater:dbt]
+project_dir = ./dbt
+profiles_dir = ./dbt
+target = dev
+
+[sqlfluff:templater:jinja]
+apply_dbt_builtins = True
+
+## INDENTATION
+# See https://docs.sqlfluff.com/en/stable/indentation.html
+[sqlfluff:indentation]
+indent_unit = space
+indented_joins = False
+indented_ctes = True
+indented_using_on = True
+indented_on_contents = True
+template_blocks_indent = True
+tab_space_size = 4
+
+[sqlfluff:rules:aliasing.table]
+aliasing = implicit
+
+[sqlfluff:rules:aliasing.column]
+aliasing = explicit
+
+[sqlfluff:rules:ambiguous.join]
+fully_qualify_join_types = outer
+
+[sqlfluff:rules:convention.casting_style]
+preferred_type_casting_style = shorthand
+
