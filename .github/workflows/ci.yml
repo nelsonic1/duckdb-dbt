@@ -17,10 +17,31 @@ jobs:
             cache: 'pip'
 
       - name: Install dependencies
-        run: pip install $(grep -i -E '^sqlfluff' requirements.txt)
+        run: pip install requirements.txt)
 
       - name: Install dbt deps
         run: cd dbt && dbt deps
 
+      - name: Get changed .sql files in /models to lint
+        id: get_files_to_lint
+        shell: bash -l {0}
+        run: |
+          # Set the command in the $() brackets as an output to use in later steps
+          echo "::set-output name=lintees::$(
+          # Issue where grep regular expressions don't work as expected on the
+          # Github Actions shell, check dbt/models/ folder
+          echo \
+          $(echo ${{ steps.get_file_changes.outputs.files_modified }} |
+          tr -s ' ' '\n' |
+          grep -E '^dbt/models.*[.]sql$' |
+          tr -s '\n' ' ') \
+          $(echo ${{ steps.get_file_changes.outputs.files_added }} |
+          tr -s ' ' '\n' |
+          grep -E '^dbt/models.*[.]sql$' |
+          tr -s '\n' ' ')
+          )"
+
       - name: Lint models
         run: sqlfluff lint ./dbt/models
+
+      
