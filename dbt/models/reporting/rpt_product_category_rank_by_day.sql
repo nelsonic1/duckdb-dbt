@@ -4,7 +4,7 @@ SELECT
     order_purchase_date,
     product_category_name,
     SUM(price) AS revenue_usd,
-    RANK() OVER(PARTITION BY order_purchase_date ORDER BY SUM(price) DESC) AS category_rank
+    RANK() OVER (PARTITION BY order_purchase_date ORDER BY SUM(price) DESC) AS category_rank
 FROM {{ ref('dim_order') }}
-GROUP BY 1, 2
+GROUP BY order_purchase_date, product_category_name
 ORDER BY order_purchase_date DESC, category_rank ASC
