@@ -19,5 +19,8 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
+      - name: Install dbt deps
+        run: cd dbt && dbt deps
+
       - name: Lint models
         run: sqlfluff lint ./dbt/models
