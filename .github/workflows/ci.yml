@@ -47,7 +47,7 @@ jobs:
 
       - name: Lint dbt models
         if: steps.changed-files.outputs.any_changed == 'true'
-        run: sqlfluff lint --format github-annotation --annotation-level failure --nofail ${{ steps.changed-files.outputs.all_changed_files }} > annotations.json
+        run: sqlfluff lint --format github-annotation --annotation-level failure --nofail ${{ steps.changed-files.outputs.all_changed_files }} | grep -E '\[{"file"' > annotations.json
 
       - name: Annotate
         if: steps.changed-files.outputs.any_changed == 'true'
