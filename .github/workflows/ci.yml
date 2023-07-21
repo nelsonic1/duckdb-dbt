@@ -27,6 +27,13 @@ jobs:
 
       - name: Get Changed Files
         uses: tj-actions/changed-files@v37.4.0
+        with:
+          path: dbt/models
+          files: "*.sql"
+
+      - name: List files
+        run: |
+          echo "All changed files: ${{ steps.changed-files.outputs.all_changed_files }}"
 
       - name: List all changed files
         run: |
