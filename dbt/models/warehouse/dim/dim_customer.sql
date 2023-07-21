@@ -1,3 +1,5 @@
+--add a comment
+
 WITH changes AS (
 SELECT
     {{ dbt_utils.generate_surrogate_key(['customer_id']) }} AS customer_key,
