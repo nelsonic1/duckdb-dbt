@@ -33,10 +33,9 @@ The dbt project is set up as follows:
 ## dbt Test Storage
 dbt test results are stored in duckdb via configs in `dbt_project.yml`
 
-
-## CICD - Linting
+## CI/CD - Linting
 This project makes use of SQLFluff linting to validate code-consistency.
-There is a Github Actions workflow setup to perform CI/CD that will automatically look for changed files in the dbt/models/ directory and automatically run SQLFLuff if necessary.
+There is a Github Actions workflow setup to perform CICD that will automatically look for changed files in the dbt/models/ directory and automatically run SQLFLuff if necessary.
 
 See: `./github/workflows/ci.yml`
 
@@ -100,5 +99,4 @@ duckdb select from rpt_final_order_summary model
 - Run the outputs through a visualization tool to ensure sanity - does it pass the eyeball test? Rill Developer?
 - Split all of the models up into their own schemas - for ease I just kept them in the same schema.
     - Run `SHOW ALL TABLES;` on duckdb
-- Add linting so that all of the sql is consistent - SQLFluff
 - Create a Makefile so the project is easy to develop on
