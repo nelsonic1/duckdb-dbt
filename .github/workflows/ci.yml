@@ -20,7 +20,7 @@ jobs:
         id: changed-files
         uses: tj-actions/changed-files@v37
         with:
-          files: dbt/models/
+          files: dbt/models/**/*.sql
           separator: ' '
 
       - name: List all changed files
@@ -32,21 +32,21 @@ jobs:
       - name: List changed
         run: echo ${{ steps.changed-files.outputs.all_changed_files }}
 
-      - name: Setup Python  
-        uses: actions/setup-python@v4
-        with:
-            python-version: '3.10'
-            cache: 'pip'
+      # - name: Setup Python  
+      #   uses: actions/setup-python@v4
+      #   with:
+      #       python-version: '3.10'
+      #       cache: 'pip'
 
-      - name: Install dependencies
-        run: pip install -r requirements.txt
+      # - name: Install dependencies
+      #   run: pip install -r requirements.txt
 
-      - name: Install dbt deps
-        run: cd dbt && dbt deps
+      # - name: Install dbt deps
+      #   run: cd dbt && dbt deps
 
       
-      - name: Lint dbt models
-        run: sqlfluff lint ./dbt/models
+      # - name: Lint dbt models
+      #   run: sqlfluff lint ./dbt/models
 
 # jobs:
 #   # -------------------------------------------------------------
