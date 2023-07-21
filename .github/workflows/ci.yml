@@ -45,6 +45,8 @@ jobs:
         if: steps.changed-files.outputs.any_changed == 'true'
         run: cd dbt && dbt deps
 
+      # dbt is adding unwanted noise to the annotations.json file so we have to grep it out
+      # https://github.com/sqlfluff/sqlfluff-github-actions/issues/15
       - name: Lint dbt models
         if: steps.changed-files.outputs.any_changed == 'true'
         run: sqlfluff lint --format github-annotation --annotation-level failure --nofail ${{ steps.changed-files.outputs.all_changed_files }} | grep -E '\[{"file"' > annotations.json
