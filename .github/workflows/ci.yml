@@ -29,6 +29,16 @@ jobs:
           for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
             echo $file
           done
+
+      - name: Cancel if no files changed (conditional)
+        if: steps.changed-files-specific.outputs.any_changed != 'true'
+        uses: andymckay/cancel-action@0.2
+
+      # needed since the run is not cancelled immediately
+      - name: Wait for run cancellation (conditional)
+        if: steps.changed-files-specific.outputs.any_changed != 'true'
+        shell: bash
+        run: while true; do echo "Waiting for job to be cancelled"; sleep 5; done
         
       - name: Setup Python  
         uses: actions/setup-python@v4
