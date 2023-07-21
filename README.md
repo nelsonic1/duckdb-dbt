@@ -34,9 +34,9 @@ The dbt project is set up as follows:
 dbt test results are stored in duckdb via configs in `dbt_project.yml`
 
 
-## SQLFluff Linting
+## CICD - Linting
 This project makes use of SQLFluff linting to validate code-consistency.
-There is a Github Actions workflow setup that will automatically look for changed files in the dbt/models/ directory and automatically run SQLFLuff if necessary.
+There is a Github Actions workflow setup to perform CI/CD that will automatically look for changed files in the dbt/models/ directory and automatically run SQLFLuff if necessary.
 
 See: `./github/workflows/ci.yml`
 
