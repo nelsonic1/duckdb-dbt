@@ -33,7 +33,9 @@ jobs:
       - name: Cancel if no files changed (conditional)
         if: steps.changed-files-specific.outputs.any_changed != 'true'
         uses: andymckay/cancel-action@0.2
-
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          
       # needed since the run is not cancelled immediately
       - name: Wait for run cancellation (conditional)
         if: steps.changed-files-specific.outputs.any_changed != 'true'
