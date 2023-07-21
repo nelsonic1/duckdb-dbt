@@ -10,7 +10,8 @@ jobs:
   lint-models:
     runs-on: ubuntu-latest
     permissions:
-      pull-requests: write-all
+      pull-requests: read
+      id-token: read
 
     steps:
       - name: Checkout code
