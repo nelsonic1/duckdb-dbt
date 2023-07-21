@@ -29,18 +29,6 @@ jobs:
           for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
             echo $file
           done
-
-      - name: Cancel if no files changed (conditional)
-        if: steps.changed-files-specific.outputs.any_changed != 'true'
-        uses: andymckay/cancel-action@0.2
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
-          
-      # needed since the run is not cancelled immediately
-      - name: Wait for run cancellation (conditional)
-        if: steps.changed-files-specific.outputs.any_changed != 'true'
-        shell: bash
-        run: while true; do echo "Waiting for job to be cancelled"; sleep 5; done
         
       - name: Setup Python  
         uses: actions/setup-python@v4
@@ -56,29 +44,3 @@ jobs:
 
       - name: Lint dbt models
         run: sqlfluff lint ${{ steps.changed-files.outputs.all_changed_files }}
-
-# jobs:
-#   # -------------------------------------------------------------
-#   # Event `pull_request`: Returns all changed pull request files.
-#   # --------------------------------------------------------------
-#   changed_files:
-#     # NOTE:
-#     # - This is limited to pull_request* events and would raise an error for other events.
-#     # - A maximum of 3000 files can be returned.
-#     # - For more flexibility and no limitations see "Using local .git history" above.
-
-#     runs-on: ubuntu-latest  # windows-latest || macos-latest
-#     name: Test changed-files
-#     permissions:
-#       pull-requests: read
-
-#     steps:
-#       - name: Get changed files
-#         id: changed-files
-#         uses: tj-actions/changed-files@v37
-
-#       - name: List all changed files
-#         run: |
-#           for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
-#             echo "$file was changed"
-#           done
