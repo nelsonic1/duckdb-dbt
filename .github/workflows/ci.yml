@@ -21,6 +21,7 @@ jobs:
         uses: tj-actions/changed-files@v37
         with:
           path: dbt/models
+          files: '*.sql'
 
       - name: List all changed files
         run: |
