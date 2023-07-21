@@ -30,22 +30,20 @@ jobs:
             echo $file
           done
         
+      - name: Setup Python  
+        uses: actions/setup-python@v4
+        with:
+            python-version: '3.10'
+            cache: 'pip'
 
-      # - name: Setup Python  
-      #   uses: actions/setup-python@v4
-      #   with:
-      #       python-version: '3.10'
-      #       cache: 'pip'
+      - name: Install dependencies
+        run: pip install -r requirements.txt
 
-      # - name: Install dependencies
-      #   run: pip install -r requirements.txt
+      - name: Install dbt deps
+        run: cd dbt && dbt deps
 
-      # - name: Install dbt deps
-      #   run: cd dbt && dbt deps
-
-      
-      # - name: Lint dbt models
-      #   run: sqlfluff lint ./dbt/models
+      - name: Lint dbt models
+        run: sqlfluff lint ${{ steps.changed-files.outputs.all_changed_files }}
 
 # jobs:
 #   # -------------------------------------------------------------
