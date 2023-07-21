@@ -43,4 +43,5 @@ jobs:
         run: cd dbt && dbt deps
 
       - name: Lint dbt models
+        if: steps.changed-files-specific.outputs.any_changed == 'true'
         run: sqlfluff lint ${{ steps.changed-files.outputs.all_changed_files }}
