@@ -16,23 +16,19 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Get changed files
+      - name: Get changed SQL files
         id: changed-files
         uses: tj-actions/changed-files@v37
         with:
           files: dbt/models/**/*.sql
           separator: ' '
-        run: |
-          echo "Changed files: ${{ steps.changed-files.outputs.all_changed_files }}"
 
-      - name: List all changed files
+      - name: List changed SQL files
         run: |
           echo "Changed Files:";
           for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
             echo $file
           done
-
-      - name: List changed
         
 
       # - name: Setup Python  
