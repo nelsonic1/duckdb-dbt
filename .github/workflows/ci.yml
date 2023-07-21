@@ -10,8 +10,11 @@ jobs:
   lint-models:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-python@v4
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Python  
+        uses: actions/setup-python@v4
         with:
             python-version: '3.10'
             cache: 'pip'
@@ -22,32 +25,10 @@ jobs:
       - name: Install dbt deps
         run: cd dbt && dbt deps
 
-      - name: Get changed files
-        id: get_file_changes
-        uses: trilom/file-changes-action@v1.2.4
-        with:
-          output: ' '
+      - name: Get Changed Files
+        uses: tj-actions/changed-files@v37.4.0
 
-      - name: Get changed .sql files in /models to lint
-        id: get_files_to_lint
-        shell: bash -l {0}
-        run: |
-          # Set the command in the $() brackets as an output to use in later steps
-          echo "::set-output name=lintees::$(
-          # Issue where grep regular expressions don't work as expected on the
-          # Github Actions shell, check dbt/models/ folder
-          echo \
-          $(echo ${{ steps.get_file_changes.outputs.files_modified }} |
-          tr -s ' ' '\n' |
-          grep -E '^dbt/models.*[.]sql$' |
-          tr -s '\n' ' ') \
-          $(echo ${{ steps.get_file_changes.outputs.files_added }} |
-          tr -s ' ' '\n' |
-          grep -E '^dbt/models.*[.]sql$' |
-          tr -s '\n' ' ')
-          )"
-
-      - name: Lint models
+      - name: Lint dbt models
         run: sqlfluff lint ./dbt/models
 
       
