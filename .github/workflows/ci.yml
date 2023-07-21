@@ -20,9 +20,7 @@ jobs:
         id: changed-files
         uses: tj-actions/changed-files@v37
         with:
-          path: dbt/models/
-          files: |
-            *.sql
+          files: dbt/models/*.sql
 
       - name: List all changed files
         run: |
