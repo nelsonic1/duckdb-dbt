@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       pull-requests: read
-      checks: write
+      # checks: write # needed for annotations
 
     steps:
       - name: Checkout code
@@ -46,16 +46,20 @@ jobs:
         if: steps.changed-files.outputs.any_changed == 'true'
         run: cd dbt && dbt deps
 
-      # dbt is adding unwanted noise to the annotations.json file so we have to grep it out
-      # https://github.com/sqlfluff/sqlfluff-github-actions/issues/15
       - name: Lint dbt models
         if: steps.changed-files.outputs.any_changed == 'true'
-        run: sqlfluff lint --format github-annotation --annotation-level failure --nofail ${{ steps.changed-files.outputs.all_changed_files }} | grep -E '\[{"file"' > annotations.json
+        run: sqlfluff lint ${{ steps.changed-files.outputs.all_changed_files }}
 
-      - name: Annotate
-        if: steps.changed-files.outputs.any_changed == 'true'
-        uses: yuzutech/annotations-action@v0.4.0
-        with:
-          repo-token: "${{ secrets.GITHUB_TOKEN }}"
-          title: "lint-models-results"
-          input: "./annotations.json"
+      # # dbt is adding unwanted noise to the annotations.json file so we have to grep it out
+      # # https://github.com/sqlfluff/sqlfluff-github-actions/issues/15
+      # - name: Lint dbt models
+      #   if: steps.changed-files.outputs.any_changed == 'true'
+      #   run: sqlfluff lint --format github-annotation --annotation-level failure --nofail ${{ steps.changed-files.outputs.all_changed_files }} | grep -E '\[{"file"' > annotations.json
+
+      # - name: Annotate
+      #   if: steps.changed-files.outputs.any_changed == 'true'
+      #   uses: yuzutech/annotations-action@v0.4.0
+      #   with:
+      #     repo-token: "${{ secrets.GITHUB_TOKEN }}"
+      #     title: "lint-models-results"
+      #     input: "./annotations.json"
