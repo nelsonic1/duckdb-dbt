@@ -1,5 +1,3 @@
--- add changes
-WITH changes AS (
 SELECT
     {{ dbt_utils.generate_surrogate_key(['customer_id']) }} AS customer_key,
     customer_id,
@@ -8,6 +6,3 @@ SELECT
     customer_city,
     customer_state
 FROM {{ ref('staging_olist_order_customer') }}
-)
-
-SELECT * FROM changes

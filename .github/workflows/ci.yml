@@ -57,5 +57,5 @@ jobs:
         uses: yuzutech/annotations-action@v0.4.0
         with:
           repo-token: "${{ secrets.GITHUB_TOKEN }}"
-          title: "sqlfluff-lint-results"
+          title: "lint-models-results"
           input: "./annotations.json"
