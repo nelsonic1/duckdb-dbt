@@ -27,9 +27,6 @@ jobs:
 
       - name: Get Changed Files
         uses: tj-actions/changed-files@v37.4.0
-        with:
-          path: dbt/models
-          files: "*.sql"
 
       - name: List files
         run: |
