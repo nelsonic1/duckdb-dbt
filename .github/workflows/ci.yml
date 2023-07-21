@@ -51,7 +51,7 @@ jobs:
 
       - name: Annotate
         if: steps.changed-files.outputs.any_changed == 'true'
-        uses: yuzutech/annotations-action@v0.3.0
+        uses: yuzutech/annotations-action@v0.4.0
         with:
           repo-token: "${{ secrets.GITHUB_TOKEN }}"
           title: "SQLFluff Lint"
