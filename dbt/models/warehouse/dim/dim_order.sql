@@ -1,4 +1,3 @@
---changed files
 SELECT
     {{ dbt_utils.generate_surrogate_key(['o.order_id']) }} AS order_key,
     {{ dbt_utils.generate_surrogate_key(['o.order_id', 'oi.order_item_id']) }} AS order_item_key,
