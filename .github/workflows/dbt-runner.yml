@@ -1,18 +1,22 @@
-name: Hello World Every 5 Minutes
+name: My Workflow
 
 on:
+  push:
+    branches:
+      - main
+  workflow_dispatch: {} # Enable manual runs
   schedule:
     - cron: '*/5 * * * *' # Runs every 5 minutes
 
 jobs:
-  hello:
+  my_job:
     runs-on: ubuntu-latest
 
     steps:
     - name: Check out code
       uses: actions/checkout@v2
 
-    - name: Echo Hello World
+    - name: Run My Task
       run: echo "Hello World"
 
    
