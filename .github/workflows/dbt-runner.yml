@@ -20,7 +20,7 @@ jobs:
         run: echo "My secret is ${{ secrets.MY_SECRET }}"
 
       - name: Echo variable
-        run: echo "My variable is ${{ env.MY_VARIABLE }}""
+        run: echo "My variable is ${{ env.MY_VARIABLE }}"
 
       # - name: Checkout code
       #   uses: actions/checkout@v3
