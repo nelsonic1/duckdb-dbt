@@ -9,8 +9,9 @@ on:
     - cron: '*/5 * * * *' # Runs every 5 minutes
 
 jobs:
-  my_job:
+  dbt-runner:
     runs-on: ubuntu-latest
+    environment: production
     env:
       MY_SECRET: ${{ secrets.MY_SECRET }}
       MY_VARIABLE: ${{ env.MY_VARIABLE }}
