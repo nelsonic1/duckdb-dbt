@@ -1,12 +1,19 @@
+name: Hello World Every 5 Minutes
+
 on:
   schedule:
-    - cron: '20,25,30 * * * *'
+    - cron: '*/5 * * * *' # Runs every 5 minutes
 
 jobs:
-  test_schedule:
+  hello:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Every time
-        run: echo "This step will always run"
+    - name: Check out code
+      uses: actions/checkout@v2
+
+    - name: Echo Hello World
+      run: echo "Hello World"
+
    
   
