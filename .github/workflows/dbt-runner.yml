@@ -11,38 +11,47 @@ on:
 jobs:
   my_job:
     runs-on: ubuntu-latest
+    env:
+      MY_SECRET: ${{ secrets.MY_SECRET }}
+      MY_VARIABLE: ${{ env.MY_VARIABLE }}
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+      - name: Echo secret
+        run: echo ${{ secrets.MY_SECRET }}
 
-      - name: Install Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.11'
+      - name: Echo variable
+        run: echo ${{ env.MY_VARIABLE }}
+
+      # - name: Checkout code
+      #   uses: actions/checkout@v3
+
+      # - name: Install Python
+      #   uses: actions/setup-python@v4
+      #   with:
+      #     python-version: '3.11'
       
-      - name: Install Poetry
-        uses: snok/install-poetry@v1
-        with:
-          version: 1.6.1
-          virtualenvs-create: true
-          virtualenvs-in-project: true
-          installer-parallel: true
+      # - name: Install Poetry
+      #   uses: snok/install-poetry@v1
+      #   with:
+      #     version: 1.6.1
+      #     virtualenvs-create: true
+      #     virtualenvs-in-project: true
+      #     installer-parallel: true
 
-      - name: Load cached venv
-        id: cached-poetry-dependencies
-        uses: actions/cache@v3
-        with:
-          path: .venv
-          key: venv-${{ runner.os }}-${{ steps.setup-python.outputs.python-version }}-${{ hashFiles('**/poetry.lock') }}
+      # - name: Load cached venv
+      #   id: cached-poetry-dependencies
+      #   uses: actions/cache@v3
+      #   with:
+      #     path: .venv
+      #     key: venv-${{ runner.os }}-${{ steps.setup-python.outputs.python-version }}-${{ hashFiles('**/poetry.lock') }}
 
-      - name: Install project dependencies
-        if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
-        run: poetry install --no-interaction --no-root
+      # - name: Install project dependencies
+      #   if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
+      #   run: poetry install --no-interaction --no-root
       
-      - name: Install dbt dependencies
-        run: cd dbt && poetry run dbt deps
+      # - name: Install dbt dependencies
+      #   run: cd dbt && poetry run dbt deps
 
-      - name: Run dbt
-        run: cd dbt && poetry run dbt run --profiles-dir . --project-dir .
+      # - name: Run dbt
+      #   run: cd dbt && poetry run dbt run --profiles-dir . --project-dir .
   
