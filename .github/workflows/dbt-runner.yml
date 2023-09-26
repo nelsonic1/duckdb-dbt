@@ -12,15 +12,13 @@ jobs:
   dbt-runner:
     runs-on: ubuntu-latest
     environment: production
-    env:
-      MY_SECRET: ${{ secrets.MY_SECRET }}
 
     steps:
       - name: Echo secret
         run: echo "My secret is ${{ secrets.MY_SECRET }}"
 
       - name: Echo variable
-        run: echo "My variable is ${{ env.MY_VARIABLE }}"
+        run: echo "My variable is ${{ vars.MY_VARIABLE }}"
 
       # - name: Checkout code
       #   uses: actions/checkout@v3
