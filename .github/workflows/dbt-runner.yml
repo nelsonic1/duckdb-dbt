@@ -14,7 +14,6 @@ jobs:
     environment: production
     env:
       MY_SECRET: ${{ secrets.MY_SECRET }}
-      MY_VARIABLE: ${{ env.MY_VARIABLE }}
 
     steps:
       - name: Echo secret
