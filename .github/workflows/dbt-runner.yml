@@ -1,0 +1,33 @@
+name: Do things every minute
+on:
+  schedule:
+    - cron: "*/1 * * * *"
+
+
+jobs:
+  dbt-runner:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Echo some stuff
+        run: echo "Hello GH Actions!";
+
+      # - name: Setup Python
+      #   uses: actions/setup-python@v4
+      #   with:
+      #       python-version: '3.9'
+      #       cache: 'pip'
+
+      # - name: Install dependencies
+      #   run: pip install -r requirements.txt
+
+      # - name: Install dbt deps
+      #   run: cd dbt && dbt deps
+
+      # - name: Run dbt
+      #   run: cd dbt && dbt run --profiles-dir .
+   
+  
