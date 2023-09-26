@@ -17,10 +17,10 @@ jobs:
 
     steps:
       - name: Echo secret
-        run: echo ${{ secrets.MY_SECRET }}
+        run: echo "My secret is ${{ secrets.MY_SECRET }}"
 
       - name: Echo variable
-        run: echo ${{ env.MY_VARIABLE }}
+        run: echo "My variable is ${{ env.MY_VARIABLE }}""
 
       # - name: Checkout code
       #   uses: actions/checkout@v3
