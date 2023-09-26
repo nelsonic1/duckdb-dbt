@@ -13,11 +13,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Check out code
-      uses: actions/checkout@v2
+      - name: Check out code
+        uses: actions/checkout@v3
 
-    - name: Run My Task
-      run: echo "Hello World"
+      - name: Run My Task
+        run: echo "Hello World"
 
    
   
