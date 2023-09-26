@@ -41,7 +41,7 @@ jobs:
         run: poetry install --no-interaction --no-root
       
       - name: Install dbt dependencies
-        run: cd dbt && dbt deps
+        run: cd dbt && poetry run dbt deps
 
       - name: Run dbt
         run: cd dbt && poetry run dbt run --profiles-dir . --project-dir .
