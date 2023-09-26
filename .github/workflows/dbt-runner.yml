@@ -1,29 +1,12 @@
-name: dbt-runner
 on:
   schedule:
-    - cron: "*/5 * * * *"
+    - cron: '20,25,30 * * * *'
 
 jobs:
-  dbt-runner:
+  test_schedule:
     runs-on: ubuntu-latest
     steps:
-      - name: Echo some stuff
-        run: echo "Hello GH Actions!"
-
-
-      # - name: Setup Python
-      #   uses: actions/setup-python@v4
-      #   with:
-      #       python-version: '3.9'
-      #       cache: 'pip'
-
-      # - name: Install dependencies
-      #   run: pip install -r requirements.txt
-
-      # - name: Install dbt deps
-      #   run: cd dbt && dbt deps
-
-      # - name: Run dbt
-      #   run: cd dbt && dbt run --profiles-dir .
+      - name: Every time
+        run: echo "This step will always run"
    
   
