@@ -10,7 +10,7 @@ on:
 
 
 jobs:
-  dbt-runner:
+  dbt-run:
     runs-on: ubuntu-latest
     environment: production
     env:
@@ -51,6 +51,7 @@ jobs:
         run: cd dbt && poetry run dbt run --profiles-dir . --project-dir .
 
   dbt-docs:
+    needs: dbt-run
     runs-on: ubuntu-latest
     environment: production
     steps:
