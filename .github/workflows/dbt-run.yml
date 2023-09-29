@@ -74,5 +74,8 @@ jobs:
 
       - name: Upload files to S3
         run: |
-          aws s3 cp /home/runner/work/duckdb-dbt/duckdb-dbt/.sqlfluff s3://duckdb-dbt-docs/
+          aws s3 cp /home/runner/work/duckdb-dbt/duckdb-dbt/dbt/target/catalog.json s3://duckdb-dbt-docs/
+          aws s3 cp /home/runner/work/duckdb-dbt/duckdb-dbt/dbt/target/index.html s3://duckdb-dbt-docs/
+          aws s3 cp /home/runner/work/duckdb-dbt/duckdb-dbt/dbt/target/manifest.json s3://duckdb-dbt-docs/
+
   
