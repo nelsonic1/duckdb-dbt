@@ -50,14 +50,6 @@ jobs:
       - name: Run dbt
         run: cd dbt && poetry run dbt run --profiles-dir . --project-dir .
 
-  dbt-docs:
-    needs: dbt-run
-    runs-on: ubuntu-latest
-    environment: production
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
       - name: Set up AWS CLI
         uses: aws-actions/configure-aws-credentials@v4
         with:
