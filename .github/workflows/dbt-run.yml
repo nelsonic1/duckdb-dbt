@@ -63,7 +63,7 @@ jobs:
 
       # - name: List files
       #   run: ls -la
-      
+
       - name: Set up AWS CLI
         uses: aws-actions/configure-aws-credentials@v4
         with:
@@ -74,5 +74,5 @@ jobs:
 
       - name: Upload files to S3
         run: |
-          aws s3 sync /home/runner/work/duckdb-dbt/duckdb-dbt/.sqlfluff s3://duckdb-dbt-docs/
+          aws s3 cp /home/runner/work/duckdb-dbt/duckdb-dbt/.sqlfluff s3://duckdb-dbt-docs/
   
