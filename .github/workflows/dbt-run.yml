@@ -58,12 +58,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # - name: pwd
-      #   run: pwd
-
-      # - name: List files
-      #   run: ls -la
-
       - name: Set up AWS CLI
         uses: aws-actions/configure-aws-credentials@v4
         with:
@@ -72,10 +66,11 @@ jobs:
           role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME }}
           aws-region: us-east-2
 
+      - name: Generate Docs
+        run: cd dbt && poetry run dbt docs generate --profiles-dir . --project-dir .
+      
       - name: Upload files to S3
         run: |
           aws s3 cp /home/runner/work/duckdb-dbt/duckdb-dbt/dbt/target/catalog.json s3://duckdb-dbt-docs/
           aws s3 cp /home/runner/work/duckdb-dbt/duckdb-dbt/dbt/target/index.html s3://duckdb-dbt-docs/
           aws s3 cp /home/runner/work/duckdb-dbt/duckdb-dbt/dbt/target/manifest.json s3://duckdb-dbt-docs/
-
-  
